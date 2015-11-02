@@ -1,0 +1,2 @@
+basically from https://github.com/NoAvailableAlias/signal-slot-benchmarks/blob/master/benchmark_utility.hpp
+but also capable of printing endl
