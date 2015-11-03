@@ -48,8 +48,9 @@ std::tuple<Args...>& operator<< (std::tuple<Args...>&& t, T&& x)
    return tee_stream<sizeof...(Args)>::print(t, std::forward<T>(x));
 }
 
-using CoutType = std::basic_ostream<char, std::char_traits<char> >;
-using EndlType = CoutType &(*)(CoutType &);
+using EndlType = std::ostream&(* const)(std::ostream&);
+//using CoutType = std::basic_ostream<char, std::char_traits<char> >;
+//using EndlType = CoutType &(*)(CoutType &);
 
 template <typename ...Args>
 std::tuple<Args...>& operator<< (std::tuple<Args...>& t, EndlType&& x)
@@ -63,27 +64,6 @@ std::tuple<Args...>& operator<< (std::tuple<Args...>&& t, EndlType&& x)
 }
 
 
-
-
-class A {
-};
-
-template <typename T>
-A &operator<<(A &a, const T &t)
-{
-   std::cout << t;
-   return a;
-}
-
-using CoutType = std::basic_ostream<char, std::char_traits<char> >;
-
-using MyEndl = CoutType &(*)(CoutType &);
-
-A &operator<<(A &a, MyEndl func)
-{
-   func(std::cout);
-   return a;
-}
 
 
 int main()
